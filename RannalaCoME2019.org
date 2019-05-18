@@ -1,0 +1,140 @@
+#+TITLE: Species Tree Inference
+#+AUTHOR: Bruce Rannala @ UC Davis
+#+DATE: 05-2019
+#+OPTIONS: H:2 toc:t num:t date:nil
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [xetex]
+#+LATEX_HEADER: \usepackage{fontspec}
+#+LATEX_HEADER: \setsansfont{Montserrat Regular}
+#+BEAMER_THEME: Montpellier
+#+BEAMER_COLOR_THEME: dove
+#+BEAMER_FONT_THEME: professionalfonts
+#+COLUMNS: %45ITEM %10BEAMER_ENV(Env) %10BEAMER_ACT(Act) %4BEAMER_COL(Col)
+
+* Coalescent Theory
+** Pedigree
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/pedigree.pdf]] 
+
+** Gene Tree Within a Pedigree
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/pedigreegenetree.pdf]] 
+
+** Population Coalescent ($n=2$)
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{0.4\textwidth}
+[[./figs/coalescenttree.pdf]] 
+
+** Population Coalescent ($n=2$)
+*** Probability of common parent ($P_1 = \frac{1}{2N}$):
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{0.4\textwidth}
+[[./figs/c2n1p.pdf]] 
+
+*** Probability of distinct parents ($P_2 = 1 - \frac{1}{2N}$):
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{0.4\textwidth}
+[[./figs/c2n2p.pdf]] 
+
+** Population Coalescent ($n=2$) 
+Probability no coalescence by generation $t$
+\begin{displaymath}
+P_2^{(t)} = \left( 1 - \frac{1}{2N} \right)^t 
+\end{displaymath}
+Transform to ``diffusion'' timescale
+\begin{displaymath}
+t = (2N)\tau
+\end{displaymath}
+Unit of time is now 2$N$ generations. One generation on this timescale is
+\begin{displaymath}
+d \tau = \frac{1}{2N}
+\end{displaymath}
+so as $N \rightarrow \infty$ time appears continuous.
+
+** Population Coalescent ($n=2$) 
+Probability of no coalescence (on the transformed timescale) is
+\begin{displaymath}
+P_2^{(\tau)} = \left( 1 - \frac{1}{2N} \right)^{\tau(2N)} 
+\end{displaymath}
+and for large population size this converges to 
+\begin{displaymath}
+\lim_{N \rightarrow \infty} \left( 1 - \frac{1}{2N} \right)^{\tau(2N)} = \mathrm{e}^{-\tau} 
+\end{displaymath}
+
+** Expectation of Coalescence Time ($n=2$) 
+On the original discrete generation timescale the expected time for 2 sequences to coalesce is 
+\begin{eqnarray}
+\mathbb{E}(t) & = & \sum_{t=0}^\infty t P_2^{(t)} \nonumber \\
+ & = & \sum_{t=1}^\infty \left( 1- \frac{1}{2N} \right)^{t-1} \frac{1}{2N} = 2N. \nonumber
+\end{eqnarray}
+On the transformed continuous timescale the expected time to coalescence is
+\begin{displaymath}
+\mathbb{E}(\tau) = \int P_2^{(\tau)} d\tau = \int_{0}^\infty \tau \mathrm{e}^{-\tau} d\tau = 1.
+\end{displaymath}
+
+** Distribution of TMRCA ($n=2$)
+Recall: an exponentially distributed random variable $x$ with rate $\lambda$ has probability density function
+\begin{displaymath}
+f(x) = \lambda \mathrm{e}^{-\lambda x},
+\end{displaymath}
+with mean (expectation) 
+\begin{displaymath}
+\mathbb{E}(x) = 1/\lambda,
+\end{displaymath}
+and variance 
+\begin{displaymath}
+\mathrm{Var}(x) = 1/(\lambda^2). 
+\end{displaymath}
+** Distribution of TMRCA ($n=2$)
+The probability density function of the coalescence time for two sequences
+on the transformed timescale ($2N$ generations) is
+\begin{displaymath}
+f(\tau) = \mathrm{e}^{-\tau},
+\end{displaymath}
+which is an exponential distribution with $\lambda=1$. The mean and variance are  
+\begin{displaymath}
+\mathbb{E}(\tau) = 1,
+\end{displaymath}
+and 
+\begin{displaymath}
+\mathrm{Var}(\tau) = 1.
+\end{displaymath}
+** Distribution of TMRCA ($n=2$)
+The mean and variance of the coalescence time for two sequences on the original timescale (generations) are
+\begin{eqnarray}
+\mathbb{E}(t) & = & \mathbb{E}[(2N) \tau] \nonumber \\
+ & = & (2N) \mathbb{E}(\tau) \nonumber \\
+ & = & 2N, \nonumber
+\end{eqnarray}
+and
+\begin{eqnarray}
+\mathrm{Var}(t) & = & \mathrm{Var}[(2N) \tau] \nonumber \\
+ & = & (2N)^2 \mathrm{Var}(\tau) \nonumber \\
+ & = & 4N^2. \nonumber
+\end{eqnarray}
+** Distribution of TMRCA ($n=2$)
+#+ATTR_LATEX: :width 0.8\textwidth :placement {r}{0.8\textwidth}
+[[./figs/pdfn2.pdf]] 
+
+
+** Population Coalescent ($n \geq 2$)
+#+ATTR_LATEX: :width 0.75\textwidth :placement {r}{\textwidth}
+[[./figs/ncoalescent.pdf]] 
+
+** Population Coalescent ($n \geq 2$)
+Waiting time for $i$ lineages to coalesce to $i-1$ lineages
+\begin{displaymath}
+f(\tau_i) = \frac{i(i-1)}{2} \mathrm{e}^{-\frac{i(i-1)}{2} \tau_i}
+\end{displaymath}
+This is an exponential distribution with rate parameter
+\begin{displaymath}
+\frac{i(i-1)}{2}
+\end{displaymath}
+The mean and variance are therefore
+\begin{displaymath}
+\mathbb{E}(\tau_i) = \frac{2}{i(i-1)}, \,\, \mathrm{Var}(\tau_i) = \frac{4}{i^2 (i-1)^2}.
+\end{displaymath}
+
+
+* Multispecies Coalescent
+
+** Gene Trees Within Species Trees
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/speciestree.pdf]]
