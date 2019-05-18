@@ -138,3 +138,25 @@ The mean and variance are therefore
 ** Gene Trees Within Species Trees
 #+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
 [[./figs/speciestree.pdf]]
+
+** Gene Trees Within Species Trees
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/hcgtree.pdf]]
+
+
+** Gene Tree Probabilities Within Species Trees 
+*** 3 species with 1 sequence each
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+3 species: 1 sequence each
+#+ATTR_LATEX: :width \textwidth :placement {r}{\textwidth}
+[[./figs/probcoal3sp.pdf]]
+*** some math
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Probability sequences from H and C coalesce in HC
+\begin{displaymath}
+\int_0^\Delta \frac{\mathrm{e}^{-\frac{x}{2N_{HC}}}}{2N_{HC}}dx = 1 - \mathrm{e}^{-\frac{\Delta}{2N_{HC}}}.
+\end{displaymath}
