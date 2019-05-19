@@ -143,7 +143,6 @@ The mean and variance are therefore
 #+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
 [[./figs/hcgtree.pdf]]
 
-
 ** Gene Tree Probabilities Within Species Trees 
 *** 3 species with 1 sequence each
 :PROPERTIES:
@@ -156,7 +155,26 @@ The mean and variance are therefore
 :PROPERTIES:
 :BEAMER_col: 0.5
 :END:
-Probability sequences from H and C coalesce in HC
+Probability H and C coalesce in HC
 \begin{displaymath}
 \int_0^\Delta \frac{\mathrm{e}^{-\frac{x}{2N_{HC}}}}{2N_{HC}}dx = 1 - \mathrm{e}^{-\frac{\Delta}{2N_{HC}}}.
+\end{displaymath}
+Probability H and C do not coalesce in HC
+\begin{displaymath}
+\mathrm{e}^{-\frac{\Delta}{2N_{HC}}}.
+\end{displaymath}
+
+** Gene Tree Probabilities Within Species Trees
+3 species: 1 sequence each
+#+ATTR_LATEX: :width \textwidth :placement {r}{\textwidth}
+[[./figs/3treesCHG.pdf]]
+
+** Gene Tree Probabilities Within Species Trees
+3 species: 1 sequence each
+\begin{eqnarray}
+\mathrm{Pr}(G = S) & = & 1 - \exp\left(\frac{-\Delta}{2N_{HC}}\right) + \frac{1}{3}\exp\left(\frac{-\Delta}{2N_{HC}}\right) \nonumber \\
+ & = & 1 - \frac{2}{3}\exp\left(\frac{-\Delta}{2N_{HC}}\right) \nonumber 
+\end{eqnarray}
+\begin{displaymath}
+\mathrm{Pr}(G \neq S) = \frac{2}{3}\exp\left(\frac{-\Delta}{2N_{HC}}\right)
 \end{displaymath}
