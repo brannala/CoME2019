@@ -178,3 +178,63 @@ Probability H and C do not coalesce in HC
 \begin{displaymath}
 \mathrm{Pr}(G \neq S) = \frac{2}{3}\exp\left(\frac{-\Delta}{2N_{HC}}\right)
 \end{displaymath}
+
+
+* Phylodemographic Inference
+
+** Estimator of Ancestral $N$ (Chen and Li, 2001) 
+Procedure: estimate gene trees from sequence data and check match with a known species tree. The expected proportion of matches is
+\begin{displaymath}
+P = 1 - \frac{2}{3} \exp\left(\frac{-\Delta}{2N}\right)
+\end{displaymath}
+Solving for $2N/\Delta$ gives the estimator:
+\begin{displaymath}
+\frac{2N}{\Delta} = \frac{1}{-\log(3/2) - \log(1-P)}.
+\end{displaymath}
+
+** Estimator of Ancestral $N$ (Chen and Li, 2001) 
+*** plot
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Population Size Versus Match Probability
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/chenli.pdf]]
+*** some math
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Example: Let $\Delta_{HC} = 4 \times 10^6$ years ($2 \times 10^5$ generations if $g=20$) and $N_{HC} = 10^5$.
+\begin{eqnarray}
+P & = & 1 - \frac{2}{3} \exp\left(-\frac{200000}{2 \times 100000}\right) \nonumber \\
+ & = & 1 - \frac{2}{3} \exp(-1) \nonumber \\
+ & = & 1 - \frac{2}{3} \times 0.368 = 0.755 \nonumber
+\end{eqnarray}
+
+** Estimator of Ancestral $N$ (Chen and Li, 2001) 
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/chenlierror.png]]
+
+** What is $\theta$?
+*** two sequences
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+two sequences
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/theta.pdf]]
+*** some math
+:PROPERTIES:
+:BEAMER_col: 0.5
+:END:
+Number of segregating sites under infinite-sites model (Watterson, 1981)
+\begin{eqnarray}
+\mathbb{E}(S) & = & \mathbb{E}(2 \mu t) \nonumber \\
+ & = & 2 \mu \mathbb{E}(t) \nonumber \\
+ & = & 2 \mu (2N) \nonumber \\
+ & = & 4 N \mu \nonumber 
+\end{eqnarray}
+We define
+\begin{displaymath}
+\theta = 4N\mu
+\end{displaymath}
