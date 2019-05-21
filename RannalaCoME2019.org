@@ -14,6 +14,19 @@
 * Coalescent Theory
 ** Pedigree
 #+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/chang.png]] 
+** Pedigree
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/Darwin.png]]
+** Pedigree
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/Haldane.png]]
+** Pedigree
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/Obama.png]]
+
+** Pedigree
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
 [[./figs/pedigree.pdf]] 
 
 ** Gene Tree Within a Pedigree
@@ -238,3 +251,83 @@ We define
 \begin{displaymath}
 \theta = 4N\mu
 \end{displaymath}
+
+** Parameters of Phylodemographic Model
+#+ATTR_LATEX: :width 0.7\textwidth :placement {r}{\textwidth}
+[[./figs/phylodemography.pdf]]
+
+** Bayesian Phylodemographic Inference
+Let $\Theta = \{ \theta, \tau \}$. For $s$ species, $\theta$ contains at most $2s - 3$ and at least $s-1$ parameters.
+$\tau$ contains $s-1$ parameters. The posterior distribution of demographic parameters given sequence data $D$ is
+\begin{displaymath}
+f(\Theta|D) = \int \frac{f(D|G) f(G|\Theta) f(\Theta)}{f(D)} dG
+\end{displaymath} 
+where $f(D|G)$ is the ``Felsenstein Likelihood'' and $f(G|\Theta)$ is the ``Multispecies Coalescent'' prior on gene trees.
+** Bayesian Phylodemographic Inference
+*** Assumptions
+Unlinked genes
+\begin{displaymath}
+f(G|\Theta) = \prod_{i=1}^L f(G_i | \Theta)
+\end{displaymath}
+Independent sites
+\begin{displaymath}
+f(D|G_i) = \prod_{i=1}^n f(D_i|G_i)
+\end{displaymath}
+No gene flow between populations.
+** Bayesian Phylodemographic Inference
+*** Markov chain Monte Carlo
+\begin{enumerate}
+\item Simulate a proposed value for a paraneter
+\begin{displaymath}
+\theta^* \approx g(\theta^* | \theta)
+\end{displaymath}
+\item Accept proposed value with probability
+\begin{displaymath}
+\alpha = \min \left(\frac{f(D|\theta^*)f(\theta^*)g(\theta|\theta^*)}{f(D|\theta)f(\theta)g(\theta^*|\theta)},1\right).
+\end{displaymath}
+\end{enumerate}
+Metropolis et al. (1953) + Hastings (1970)
+** Bayesian Phylodemographic Inference 
+*** Metropolis-Hastings Algorithm
+Edward Teller (father of the H-bomb)
+#+ATTR_LATEX: :width 0.3\textwidth :placement {r}{\textwidth}
+[[./figs/Teller.jpg]]
+** Bayesian Phylodemographic Inference 
+*** Metropolis-Hastings Algorithm
+Keith Hastings (statistician)
+#+ATTR_LATEX: :width 0.3\textwidth :placement {r}{\textwidth}
+[[./figs/Hastings.jpg]]
+** Bayesian Phylodemographic Inference 
+*** Metropolis-Hastings Algorithm
+
+#+ATTR_LATEX: :width 0.6\textwidth :placement {r}{\textwidth}
+[[./figs/hastings.pdf]]
+** Bayesian Phylodemographic Inference 
+
+*** MCMC Proposal Moves
+\begin{itemize}
+\item Propose changes to coalescent times in gene trees that respect constraints of species tree
+\item Propose changes to gene trees by subtree pruning and re-grafting (respect species tree constraints)
+\item Propose changes to effective population size parameters
+\item Propose new speciation times in the species tree and transforming gene trees to respect constraints
+\item Jointly propose proportional changes to all effective population sizes, divergence, and coalescence times
+\end{itemize}
+** Bayesian Phylodemographic Inference 
+*** Making Sense of BPP Parameters
+\begin{displaymath}
+\theta = 4N\mu
+\end{displaymath}
+ units are expected DNA substitutions.
+\newline
+To obtain $N$ we specify a mutation rate and generation time
+\begin{displaymath}
+N = \frac{\theta}{4 \times \mu \times g}
+\end{displaymath}
+Example: if $\theta_H = 0.00057$, $g = 20$ years/generation and $\mu = 10^{-9}$ mutations/year
+\begin{displaymath}
+N_H = \frac{0.00057}{4 \times 10^{-9} \times 20} = 7125
+\end{displaymath}
+
+* Species Tree Inference
+
+* Species Delimitation
