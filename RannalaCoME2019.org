@@ -75,11 +75,11 @@ and for large population size this converges to
 On the original discrete generation timescale the expected time for 2 sequences to coalesce is 
 \begin{eqnarray}
 \mathbb{E}(t) & = & \sum_{t=0}^\infty t P_2^{(t)} \nonumber \\
- & = & \sum_{t=1}^\infty \left( 1- \frac{1}{2N} \right)^{t-1} \frac{1}{2N} = 2N. \nonumber
+ & = & \sum_{t=1}^\infty t \left( 1- \frac{1}{2N} \right)^{t-1} \frac{1}{2N} = 2N. \nonumber
 \end{eqnarray}
 On the transformed continuous timescale the expected time to coalescence is
 \begin{displaymath}
-\mathbb{E}(\tau) = \int P_2^{(\tau)} d\tau = \int_{0}^\infty \tau \mathrm{e}^{-\tau} d\tau = 1.
+\mathbb{E}(\tau) = \int \tau P_2^{(\tau)} d\tau = \int_{0}^\infty \tau \mathrm{e}^{-\tau} d\tau = 1.
 \end{displaymath}
 
 ** Distribution of TMRCA ($n=2$)
@@ -328,6 +328,67 @@ Example: if $\theta_H = 0.00057$, $g = 20$ years/generation and $\mu = 10^{-9}$ 
 N_H = \frac{0.00057}{4 \times 10^{-9} \times 20} = 7125
 \end{displaymath}
 
+** Multispecies Coalescent With Introgression
+#+ATTR_LATEX: :width 0.8\textwidth :placement {r}{\textwidth}
+[[./figs/fig-models.pdf]]
+** Multispecies Coalescent With Introgression
+Standard Newick notation such as (A(B,C)) does not work for trees with introgression.
+Extended Newick format is very confusing. An explanation will be attempted by Professor Yang.
+
+
 * Species Tree Inference
+** Infer Species Tree Topology and Parameters
+#+ATTR_LATEX: :width 0.5\textwidth :placement {r}{\textwidth}
+[[./figs/hcgtree.pdf]]
+** Approaches to Species Tree Inference
+\emph{Concatenation}: assumes that all gene trees have the same topology and branch lengths.
+\newline
+\emph{Alternative}: allow different gene trees. Parametric methods model processes influencing the distribution of gene trees.
+\begin{itemize}
+\item multi-species coalescent process
+\item ongoing or periodic gene flow
+\item hybrid species
+\item recombination
+\item gene duplication (or loss)
+\item selection 
+\end{itemize}
+** Performance of Species Tree Methods
+#+ATTR_LATEX: :width 0.6\textwidth :placement {r}{\textwidth}
+[[./figs/incomprehendogram.png]]
+
+** Infer Species Tree Topology and Parameters
+Let $S$ be the species tree topology and $\Theta = \{ \theta, \tau \}$. The posterior probability of the species tree is
+\begin{displaymath}
+f(S|D) = \int_G \frac{f(D|\Theta,G) f(G|\Theta,S) f(\Theta) f(S)}{f(D)} dG 
+\end{displaymath}
+** Species Tree Proposals
+#+ATTR_LATEX: :width 0.6\textwidth :placement {r}{\textwidth}
+[[./figs/SPRspeciestree.png]]
+
+** Prior on Species Trees
+Prior on branch lengths
+\begin{itemize}
+\item Yule or Birth-Death Process (*Beast)
+\item Dirichlet Distribution conditioned on root age (BPP)
+\end{itemize}
+#+ATTR_LATEX: :width 0.4\textwidth :placement {r}{\textwidth}
+[[./figs/DirichletTree.png]]
+
+** Prior on Species Trees
+#+ATTR_LATEX: :width 0.8\textwidth :placement {r}{\textwidth}
+[[./figs/MathGenealogy.png]]
+
+** Prior on Species Trees
+Prior on topology
+\begin{itemize}
+\item Uniform on labelled histories (*Beast, BPP)
+\item Uniform on labelled trees
+\end{itemize}
+#+ATTR_LATEX: :width \textwidth :placement {r}{\textwidth}
+[[./figs/LabelledHistory.png]]
+speciesmodelprior = 0 (uniform LH)  \newline
+speciesmodelprior = 1 (uniform rooted trees)
 
 * Species Delimitation
+** Placeholder
+A placeholder
